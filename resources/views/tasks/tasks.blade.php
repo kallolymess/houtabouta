@@ -79,22 +79,18 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Tasks
                 </div>
 
                 <div class="links">
-                    @foreach ($tasks as $task)
-                        <li> {{ $task->body }} </li>
-                    @endforeach
+                    <ul>
+                        @foreach ($tasks as $task)
+                        <li>
+                            <a href="/tasks/{{ $task->id }}">{{ $task->body }}</a><br><br>
+                        </li>
+                        @endforeach
+                    </ul>
                     <br><br><br>
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
