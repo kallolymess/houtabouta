@@ -3,16 +3,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Blog</title>
+    <title>Bootswatch: Simplex</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="css/simplex-bootwatch.css" media="screen">
+    
   </head>
   <body>
-
-
-
-    
     <div class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div class="container">
         <a href="../" class="navbar-brand">Bootswatch</a>
@@ -1506,9 +1503,11 @@
     </div>
 
 
+    {{-- 
     <script src="../_vendor/jquery/dist/jquery.min.js"></script>
     <script src="../_vendor/popper.js/dist/umd/popper.min.js"></script>
     <script src="../_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../_assets/js/custom.js"></script>
+     --}}
   </body>
 </html>
