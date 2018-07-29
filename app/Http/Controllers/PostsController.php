@@ -38,6 +38,11 @@ class PostsController extends Controller
         // For this its also imp. to set the parameters that we want to be set by a form explicitly
         // in this case 'title' and 'body' like so:
         
+        $this->validate(request(), [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+        
         Post::create([
             'title' => request('title'),
             'body' => request('body')
