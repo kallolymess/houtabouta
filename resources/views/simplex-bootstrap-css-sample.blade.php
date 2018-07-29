@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="css/simplex-bootwatch.css" media="screen">
-    
+    <link rel="stylesheet" href="css/custom.min.css">
   </head>
   <body>
     <div class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div class="container">
-        <a href="../" class="navbar-brand">Bootswatch</a>
+        <a href="../" class="navbar-brand">Barber System Backend</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -1233,12 +1233,13 @@
           </div>
         </div>
 
+        <div class="bs-docs-section">
         <div class="row">
           <div class="col-lg-12">
             <h2>Cards</h2>
           </div>
         </div>
-
+  
         <div class="row">
           <div class="col-lg-4">
             <div class="bs-component">
@@ -1360,6 +1361,7 @@
               </div>
             </div>
           </div>
+        </div>
 
           <div class="col-lg-4">
             <div class="bs-component">
@@ -1498,16 +1500,14 @@
         </div>
 
       </footer>
-
-
     </div>
 
 
-    {{-- 
-    <script src="../_vendor/jquery/dist/jquery.min.js"></script>
-    <script src="../_vendor/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../_assets/js/custom.js"></script>
-     --}}
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+    
   </body>
 </html>
