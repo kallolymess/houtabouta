@@ -2,8 +2,9 @@
 
 Route::get('/', 'PostsController@index');
 Route::get('/posts/create', 'PostsController@create');
-Route::get('/posts/{postId}', 'PostsController@show');
 Route::post('/posts', 'PostsController@store');
+Route::get('/posts/{postId}', 'PostsController@show');
+Route::post('/posts/{postId}/comment', 'CommentsController@store');
 
 // Eloquent Model => Post
 // migration => create_posts_table

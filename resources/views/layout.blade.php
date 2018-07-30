@@ -15,22 +15,19 @@
   @include ('layouts.navbar')
 
   <div class="container">
-
-    <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
 
         @yield ('content')
         
+      </div>
     </div>
-
     <div class="row">
-
-        <div class="col-lg-12">
+      <div class="col-lg-12">
   
-          @include ('layouts.footer')
+        @include ('layouts.footer')
   
-        </div>
-
-
+      </div>
     </div>
   </div>
 
