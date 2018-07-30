@@ -9,12 +9,15 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return view('posts.index');
+        // $posts = Post::all(); this the oldest first (as in the database)
+        $posts = Post::latest()->get(); // latest first
+        return view('posts.index', compact('posts'));
     }
 
-    public function show()
+    public function show(Post $postId)
     {
-        return view('posts.show');
+        // $post = Post::find($which);
+        return view('posts.show', compact('postId'));
     }
 
     public function create()
@@ -42,7 +45,7 @@ class PostsController extends Controller
             'title' => 'required',
             'body' => 'required'
         ]);
-        
+
         Post::create([
             'title' => request('title'),
             'body' => request('body')

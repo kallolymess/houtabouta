@@ -3,27 +3,21 @@
 @section('content')
       <div class="col-lg-8">
 
+        @if($posts->count())
+        @foreach($posts as $post)
         <div class="card border-info mb-3" style="max-width: 60rem; min-width: 30rem;">
-          <div class="card-header">Header</div>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>
+              <a href="/posts/{{ trans($post->id) }}"  style="max-width: 60rem; min-width: 30rem;">{{ trans($post->title) }}</a>
+            </h3>
+            <span class="badge badge-info badge-pill">{{ $post->created_at->toFormattedDateString() }}</span>
+          </div>
           <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">{{ trans($post->body) }}</p>
           </div>
         </div>
-        <div class="card border-info mb-3" style="max-width: 60rem; min-width: 30rem;">
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
-        <div class="card border-info mb-3" style="max-width: 60rem; min-width: 30rem;">
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
+        @endforeach
+        @endif
 
       </div>
 
