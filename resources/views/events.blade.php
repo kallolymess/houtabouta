@@ -27,7 +27,7 @@
                       <div class="form-group">
                           <label for="start">Start Time</label>
                         <div class="">
-                          <input type="text" name="start_date" class="form-control" value="" />
+                          <input type="text" name="start_date" class="dateBarber form-control" value="" />
                         </div>
                       </div>
                     </div>
@@ -36,7 +36,7 @@
                       <div class="form-group">
                           <label for="end">End Time</label>
                         <div class="">
-                          <input type="text" name="end_date" class="form-control" value="" />
+                          <input type="text" name="end_date" class="dateBarber form-control" value="" />
                         </div>
                       </div>
                     </div>
@@ -59,5 +59,11 @@
                 {!! $calendar_details->calendar() !!}
               </div>
             </div>
+
+            <script type="text/javascript">
+              $('.dateBarber').datepicker({  
+                format: 'yyyy-mm-dd'
+              });  
+            </script>  
 
 @endsection
