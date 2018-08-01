@@ -18,6 +18,9 @@
               <a class="nav-link" href="/posts/create">° Create </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/event">° Events </a>
+            </li>
+            <li class="nav-item">
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">° Themes

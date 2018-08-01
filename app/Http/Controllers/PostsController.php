@@ -11,8 +11,9 @@ class PostsController extends Controller
     public function index()
     {
         // $posts = Post::all(); this the oldest first (as in the database)
-        $posts = Post::latest()->get(); // latest first
-        return view('posts.index', compact('posts'));
+        // $posts = Post::latest()->get(); // latest first // After getting paginate which
+        // user 
+        return view('posts.index', ['posts' => Post::latest()->paginate(4)]);
     }
 
     public function show(Post $postId)

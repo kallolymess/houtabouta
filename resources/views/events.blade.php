@@ -64,6 +64,8 @@
               $('.dateBarber').datepicker({  
                 format: 'yyyy-mm-dd'
               });  
-            </script>  
+            </script>
+            
+            {!! $calendar_details->script() !!}
 
 @endsection

@@ -11,6 +11,7 @@
         @endforeach
         @endif
 
+        {{ $posts->links() }}
       </div>
 
       <div class="col-lg-4">
