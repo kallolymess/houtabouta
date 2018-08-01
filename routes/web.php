@@ -1,10 +1,13 @@
 <?php
 
-Route::get('/', 'PostsController@index');
+Route::get('/', 'PostsController@index')->name('home');
 Route::get('/posts/create', 'PostsController@create');
 Route::post('/posts', 'PostsController@store');
 Route::get('/posts/{postId}', 'PostsController@show');
 Route::post('/posts/{postId}/comment', 'CommentsController@store');
+
+Route::get('/event', 'EventsController@index')->name('events.index');
+Route::post('/event', 'EventsController@addEvent')->name('events.add');
 
 // Eloquent Model => Post
 // migration => create_posts_table
