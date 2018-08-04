@@ -9,6 +9,8 @@ Route::post('/posts/{postId}/comment', 'CommentsController@store');
 Route::get('/event', 'EventsController@index')->name('events.index');
 Route::post('/event', 'EventsController@addEvent')->name('events.add');
 
+Route::post('/search', 'PostsController@search');
+
 // Eloquent Model => Post
 // migration => create_posts_table
 // controller => PostsController

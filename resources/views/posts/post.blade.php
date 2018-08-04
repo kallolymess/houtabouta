@@ -4,7 +4,7 @@
             <h3>
               <a href="/posts/{{ trans($post->id) }}"  style="max-width: 60rem; min-width: 30rem;">{{ trans($post->title) }}</a>
             </h3>
-            <span class="badge badge-info badge-pill">{{ $post->created_at->toFormattedDateString() }}</span>
+            <span class="badge badge-info badge-pill">{{ $post->created_at }}</span>
           </div>
           <div class="card-body">
             <p class="card-text">{{ trans($post->body) }}</p>
