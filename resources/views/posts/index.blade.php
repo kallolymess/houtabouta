@@ -3,7 +3,7 @@
 @section('content')
       <div class="col-lg-8">
 
-        @if($posts->count())
+        @if($posts)
         @foreach($posts as $post)
         
           @include('posts.post')
@@ -11,7 +11,8 @@
         @endforeach
         @endif
 
-        {{ $posts->links() }}
+        {{ $posts->appends(Request::except('page'))->links() }}
+        {{-- {{ $posts->appends(['q' => '1'])->links() }} --}}
       </div>
 
       <div class="col-lg-4">

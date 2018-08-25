@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Post;
 use App\Comment;
 use DB;
+use PDO;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostsController extends Controller
 {
@@ -59,54 +61,64 @@ class PostsController extends Controller
 		return redirect('/');
 	}
 
-	public function search()
-	{
-		$this->validate(request(), [
-			's' => 'required',
-			'where' => 'required',
-			'date_from' => 'nullable|date',
-			'date_to' => 'nullable|date'
-    ]);
-    
-    // $postsCol = new Collection;
-    // $sokeItup = request('s');
-		// dd(request(['s', 'where', 'date_from', 'date_to']));
-    // $posts = Post::all();
-    
-		// $query = 'SELECT `id` FROM `posts` WHERE title like \'%'.request('s').'%\' and created_at BETWEEN \'2018-04-25\' AND \'2018-09-01\'';
-		// $query = 'SELECT id   FROM `posts` WHERE title like \'%'.request('s').'%\' and created_at BETWEEN \'2018-04-25\' AND \'2018-09-01\'';
-    
-    // dd($query);
-    // $arrDBReturn = DB::select(DB::raw($query),  array('sokeIt' => $sokeItup));
+    public function search()
+    {
+        $AAInput = $this->validate(request(), [
+            's' => 'required',
+            'where' => 'required',
+            'date_from' => 'nullable|date',
+            'date_to' => 'nullable|date'
+		]);
 
-    // foreach ($arrDBReturn as $arr) {
-    //   $postsCol->add(Post::findOrFail($arr->id));
-    // }
-    // dd($postsCol);
-    // $postsCol->paginate(2);
-    // return view('posts.index', ['posts' => $postsCol->paginate(4)]);
-    // return view('posts.index', ['posts' => $postsCol]);
+		// dd($AAInput);
 
+        // list($extraWhere, $bindArray) = $this->getExtraWhere($AAInput);
+        list($extraWhere, $bindArray) = $this->getExtraWhere([
+			's' => 'TO_BASE64(calling_lists.office)',
+			'where' => 'campaigns.id',
+			'date_from' => 'TO_BASE64(calling_lists.sponsor_id)',
+			'date_to' => 'calling_lists.id',
+			'groups' => 'agent_groups.id',
+			'agent' => 'agents.id',
+			'workshift' => 'agents.workshift',
+        ]);
+		
+		dd([$extraWhere.' ', $bindArray]);
+		dd($extraWhere);
 
-    // $posts = Post::where('id', $arrDBReturn()->id);
-    // $posts = Post::where('id', $arrDBReturn()->id);
-		// dd($posts);
-		// $posts = Post::where($query)->firstOrFail();
-		// $posts = Post::where('title', 'LIKE', 'Next')->get();
-	  // ->orWhere('name', 'like', '%' . Input::get('name') . '%')->get();
-		// $posts = Post::all();
-    // dd($posts);
+		$posts = Post::whereRaw($query)
+					->orderBy('id')
+					->paginate(4);
+		
+		$posts_old = Post::where('body', 'like', '%'.$AAInput['s'].'%')
+					->orderBy('id')
+					->paginate(4);
 
+		return view('posts.index', ['posts' => $posts]);
 
-    $users = DB::table('posts')
-    ->where([
-        ['title', 'like', '%'.request('s').'%'],
-        ['created_at', '>', request('date_from')],
-        ['created_at', '<', request('date_to')]
-    ])->paginate(2);
-    // $posts = $user->get();
-    return view('posts.index', ['posts' => $users]);
-    // dd($users);
+    }
 
-	}
+    public function getExtraWhere($params, $skipDate = false)
+    {
+        $bindArray = $skipDate ? [] : [
+            ':from' => request('date_from').' 00:00:00',
+            ':to' => request('date_to').' 23:59:59',
+        ];
+
+        $filters = '';
+        foreach ($params as $key => $column) {
+            if (request($key) && base64_decode(request($key)) !== '0') {
+                $filters .= ' AND '.$column.' = :'.$key."\n";
+                $bindArray[':'.$key] = request($key);
+            }
+        }
+        // foreach ($params as $key => $column) {
+        //     if ($key && base64_decode($key) !== '0') {
+        //         $filters .= ' AND '.$column.' = :'.$key."\n";
+        //         $bindArray[':'.$key] = $key;
+        //     }
+        // }
+
+        return [$filters.' ', $bindArray];
+    }
 }
