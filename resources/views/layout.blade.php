@@ -6,8 +6,7 @@
   <title>Barber - Kallols Reservation Systems Inc.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <link rel="stylesheet" href="/css/simplex-bootwatch.css" media="screen">
-  <link rel="stylesheet" href="/css/custom.min.css">
+  <link rel="stylesheet" href="/css/app.css" media="screen">
   <!-- Custom styles for this template -->
   <!-- <link href="starter-template.css" rel="stylesheet"> -->  
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
