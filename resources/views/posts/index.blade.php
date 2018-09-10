@@ -11,6 +11,7 @@
         @endforeach
         @endif
 
+        {{-- {{ $posts->appends($_GET)->links() }} --}}
         {{ $posts->appends(Request::except('page'))->links() }}
         {{-- {{ $posts->appends(['q' => '1'])->links() }} --}}
       </div>

@@ -1,7 +1,7 @@
 
       <div class="card border-success col-lg-12" style="max-width: 25rem;">
 
-          <form class=""  method="POST" action="search">
+          <form class=""  method="GET" action="search">
             {{ csrf_field() }}
 
             <legend>Blog Suche</legend>
