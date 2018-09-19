@@ -61,19 +61,15 @@ class PostsController extends Controller
 		return redirect('/');
 	}
 
-    public function search()
-    {
+	public function searchWorks(Request $request)
+	{
         $AAInput = $this->validate(request(), [
             's' => 'required',
             'where' => 'required',
-            'date_from' => 'required|date',
-            'date_to' => 'required|date'
+            'date_from' => 'nullable|date',
+            'date_to' => 'nullable|date'
 		]);
-
-		// dd($AAInput);
-
-        // list($extraWhere, $bindArray) = $this->getExtraWhere($AAInput);
-        list($extraWhere, $bindArray) = $this->getExtraWhere([
+		list($extraWhere, $bindArray) = $this->getExtraWhere([
 			's' => 'TO_BASE64(calling_lists.office)',
 			'where' => 'campaigns.id',
 			'date_from' => 'TO_BASE64(calling_lists.sponsor_id)',
@@ -81,44 +77,68 @@ class PostsController extends Controller
 			'groups' => 'agent_groups.id',
 			'agent' => 'agents.id',
 			'workshift' => 'agents.workshift',
-        ]);
+		]);
 		
-		// dd([$extraWhere.' ', $bindArray]);
-		// dd($extraWhere);
-
-		// $posts = Post::whereRaw($query)
-		// 			->orderBy('id')
-		// 			->paginate(4);
-		
-		// Searching with one Query->Where Clause : works properly 
-		// $posts = Post::where('body', 'like', '%'.$AAInput['s'].'%')
-		// 			->orderBy('id')
-		// 			->paginate(4);
-		
-		// return view('posts.index', compact('posts'));
-		// return view('posts.index', ['posts' => $posts]); // this should work too istead of the compact('posts')
-		
-		// Searching with Query->Where and orWhere Clause : works properly 
-		// $posts = Post::where('body', 'LIKE', '%' . $AAInput['s'] . '%')
-		// ->orWhere('title', 'LIKE', '%' . $AAInput['s'] . '%')
-		// ->orWhere('title', 'LIKE', '%second%')
-		// ->paginate(4);
-		
-		// return view('posts.index', compact('posts'));
-		// return view('posts.index', ['posts' => $posts]); // this should work too istead of the compact('posts')
-		
-		
-		// Searching with Query->Where and orWhere Clause with external functions to build query : works properly 
 		$posts = Post::where('body', 'LIKE', '%' . $AAInput['s'] . '%')
 		// ->orWhere('title', 'LIKE', '%' . $AAInput['s'] . '%')
-		// ->orWhere('title', 'LIKE', '%second%')
 		->where('created_at', '>', ($AAInput['date_from'] == '') ? '2018-01-30' : $AAInput['date_from'])
 		->where('created_at', '<', ($AAInput['date_to'] == '') ? 'CURDATE()' : $AAInput['date_to'])
-		// ->orWhere('created_at', '<', $AAInput['date_to'])
-		// ->where('created_at', '<', $AAInput['date_to'])
 		->paginate(4);
-		
+
+		$whatever = highlight_string("<?php\n" . print_r($input, true) . ";\n?>");
+		dd($whatever);
 		return view('posts.index', compact('posts'));
+		// return view('posts.index', ['posts' => $posts]); // this should work too istead of the compact('posts')
+
+    }
+
+    public function search(Request $request)
+    {
+		// dd(app('cache'));
+		// $someCryptic = encrypt(request('s'));
+		// $anArrayOfStuff = [
+		// 	app_path(),
+		// 	base_path(),
+		// 	request('s'),
+		// 	base64_encode(request('s')),
+		// 	$someCryptic,
+		// 	decrypt($someCryptic)
+		// ];
+		
+		// dd($anArrayOfStuff);
+
+		// dd(app_path().' : : '.base_path().' : : '.bcrypt(request('where')).': : victorian Magazin is what I need ');
+
+		// dd(request());
+		//  dd($request->query());
+		
+        // $AAInput = $this->validate(request()->query(), [
+        //     's' => 'required',
+        //     'where' => 'required',
+        //     'date_from' => 'nullable|date',
+        //     'date_to' => 'nullable|date'
+		// ]);
+		// dd($AAInput);
+		// list($extraWhere, $bindArray) = $this->getExtraWhere([
+		// 	's' => 'TO_BASE64(calling_lists.office)',
+		// 	'where' => 'campaigns.id',
+		// 	'date_from' => 'TO_BASE64(calling_lists.sponsor_id)',
+		// 	'date_to' => 'calling_lists.id',
+		// 	'groups' => 'agent_groups.id',
+		// 	'agent' => 'agents.id',
+		// 	'workshift' => 'agents.workshift',
+		// ]);
+		
+		$posts = Post::where('body', 'LIKE', '%' . request()->query('s') . '%')
+		// ->orWhere('title', 'LIKE', '%' . request()->query('s'] . '%')
+		// ->where('created_at', '>', (request()->query('date_from') == '') ? '2018-01-30' : request()->query('date_from'))
+		// ->where('created_at', '<', (request()->query('date_to') == '') ? 'CURDATE()' : request()->query('date_to'))
+		->paginate(4);
+
+		// dd($whatever);
+
+		return view('posts.index', compact('posts'));
+		
 		// return view('posts.index', ['posts' => $posts]); // this should work too istead of the compact('posts')
 
     }
