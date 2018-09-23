@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use App\Post;
 use App\Comment;
-use DB;
-use PDO;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostsController extends Controller

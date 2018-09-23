@@ -1,0 +1,11 @@
+{
+    "debug": false,
+    "user": "root",
+    "password": "root",
+    "host": "localhost",
+    "port": 8889,
+    "database": "barber",
+    "exclude_tables": ["migrations"],
+    "only_include_tables": ["vorgang", "daten", "kontakt", "aktion", "teammember", "tarif", "tarifmapping", "quota", "mandant", "profil", "recordings", "resources", "robinson"],
+    "KBSource_of_Origin": "https://github.com/aljorhythm/sql-to-laravel-migrations"
+}
